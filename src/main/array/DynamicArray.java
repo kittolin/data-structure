@@ -1,4 +1,4 @@
-package array;
+package main.array;
 
 import java.util.ArrayList;
 
@@ -131,6 +131,20 @@ public class DynamicArray<E> {
             throw new IllegalArgumentException("Get failed. Invalid index.");
         }
         return arr[index];
+    }
+
+    /**
+     * O(1)
+     */
+    public E getFirst() {
+        return get(0);
+    }
+
+    /**
+     * O(1)
+     */
+    public E getLast() {
+        return get(length - 1);
     }
 
     /**
