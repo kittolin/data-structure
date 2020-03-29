@@ -60,6 +60,9 @@ public class DynamicArray<E> {
         arr = newArr;
     }
 
+    /**
+     * O(n)
+     */
     public void add(int index, E e) {
         if(index < 0 || index > length) {
             throw new IllegalArgumentException("Add failed. Invalid index.");
@@ -77,14 +80,23 @@ public class DynamicArray<E> {
         length ++;
     }
 
+    /**
+     * O(n)
+     */
     public void addFirst(E e) {
         add(0, e);
     }
 
+    /**
+     * amortized time complexity: O(1)
+     */
     public void addLast(E e) {
         add(length, e);
     }
 
+    /**
+     * O(n)
+     */
     public void add(E[] arr) {
         if(arr == null) {
             throw new IllegalArgumentException("Add failed. Argument 'arr' is null.");
@@ -101,6 +113,9 @@ public class DynamicArray<E> {
         }
     }
 
+    /**
+     * O(1)
+     */
     public void set(int index, E e) {
         if(index < 0 || index >= length) {
             throw new IllegalArgumentException("Set failed. Invalid index.");
@@ -108,6 +123,9 @@ public class DynamicArray<E> {
         arr[index] = e;
     }
 
+    /**
+     * O(1)
+     */
     public E get(int index) {
         if(index < 0 || index >= length) {
             throw new IllegalArgumentException("Get failed. Invalid index.");
@@ -115,6 +133,9 @@ public class DynamicArray<E> {
         return arr[index];
     }
 
+    /**
+     * O(n)
+     */
     public int find(E e) {
         for(int i = 0; i < length; i++) {
             if(arr[i].equals(e)) {
@@ -124,6 +145,9 @@ public class DynamicArray<E> {
         return -1;
     }
 
+    /**
+     * O(n)
+     */
     public int[] findAll(E e) {
         ArrayList<Integer> list = new ArrayList<>();
         for(int i = 0; i < length; i++) {
@@ -140,10 +164,16 @@ public class DynamicArray<E> {
         return ret;
     }
 
+    /**
+     * O(n)
+     */
     public boolean contains(E e) {
         return find(e) != -1;
     }
 
+    /**
+     * O(n)
+     */
     public E remove(int index) {
         if(index < 0 || index >= length) {
             throw new IllegalArgumentException("Remove failed. Invalid index.");
@@ -157,17 +187,31 @@ public class DynamicArray<E> {
         length --;
         arr[length] = null;  // loitering objects != memory leak
 
+        // lazy 方式防止复杂度震荡
+        if (length == arr.length / 4 && arr.length / 2 != 0) {
+            resize(arr.length / 2);
+        }
+
         return ret;
     }
 
+    /**
+     * O(n)
+     */
     public E removeFirst() {
         return remove(0);
     }
 
+    /**
+     * amortized time complexity: O(1)
+     */
     public E removeLast() {
         return remove(length - 1);
     }
 
+    /**
+     * O(n)
+     */
     public int removeElement(E e) {
         int index = find(e);
         if(index != -1) {
@@ -176,7 +220,9 @@ public class DynamicArray<E> {
         return index;
     }
 
-    // TODO
+    /**
+     * O(n²) TODO
+     */
     public int[] removeAllElements(E e) {
         int[] indexes = findAll(e);
         for (int index: indexes) {
