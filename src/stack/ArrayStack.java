@@ -31,7 +31,7 @@ public class ArrayStack<E> implements Stack<E> {
     }
 
     /**
-     * amortized time complexity: O(1)
+     * Amortized time complexity: O(1)
      */
     @Override
     public void push(E e) {
@@ -39,7 +39,7 @@ public class ArrayStack<E> implements Stack<E> {
     }
 
     /**
-     * amortized time complexity: O(1)
+     * Amortized time complexity: O(1)
      */
     @Override
     public E pop() {
@@ -50,7 +50,7 @@ public class ArrayStack<E> implements Stack<E> {
     }
 
     /**
-     * O(1)
+     * Time complexity: O(1)
      */
     @Override
     public E peek() {

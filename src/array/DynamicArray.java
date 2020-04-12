@@ -53,7 +53,7 @@ public class DynamicArray<E> {
     }
 
     /**
-     * 动态扩缩容
+     * Expand or shrinkage capacity dynamically
      */
     private void resize(int newCapacity) {
         if(newCapacity <= size) {
@@ -69,7 +69,7 @@ public class DynamicArray<E> {
     }
 
     /**
-     * O(n)
+     * Time complexity: O(n)
      */
     public void add(int index, E e) {
         if(index < 0 || index > size) {
@@ -89,14 +89,14 @@ public class DynamicArray<E> {
     }
 
     /**
-     * O(n)
+     * Time complexity: O(n)
      */
     public void addFirst(E e) {
         add(0, e);
     }
 
     /**
-     * amortized time complexity: O(1)
+     * Amortized time complexity: O(1)
      */
     public void addLast(E e) {
         add(size, e);
@@ -104,7 +104,7 @@ public class DynamicArray<E> {
 
     /**
      * @author: Kitto
-     * O(n)
+     * Time complexity: O(n)
      */
     public void add(E[] arr) {
         if(arr == null) {
@@ -123,7 +123,7 @@ public class DynamicArray<E> {
     }
 
     /**
-     * O(1)
+     * Time complexity: O(1)
      */
     public void set(int index, E e) {
         if(index < 0 || index >= size) {
@@ -133,7 +133,7 @@ public class DynamicArray<E> {
     }
 
     /**
-     * O(1)
+     * Time complexity: O(1)
      */
     public E get(int index) {
         if(index < 0 || index >= size) {
@@ -143,21 +143,21 @@ public class DynamicArray<E> {
     }
 
     /**
-     * O(1)
+     * Time complexity: O(1)
      */
     public E getFirst() {
         return get(0);
     }
 
     /**
-     * O(1)
+     * Time complexity: O(1)
      */
     public E getLast() {
         return get(size - 1);
     }
 
     /**
-     * O(n)
+     * Time complexity: O(n)
      */
     public int find(E e) {
         for(int i = 0; i < size; i++) {
@@ -170,7 +170,7 @@ public class DynamicArray<E> {
 
     /**
      * @author: Kitto
-     * O(n)
+     * Time complexity: O(n)
      */
     public int[] findAll(E e) {
         ArrayList<Integer> list = new ArrayList<>();
@@ -188,14 +188,14 @@ public class DynamicArray<E> {
     }
 
     /**
-     * O(n)
+     * Time complexity: O(n)
      */
     public boolean contains(E e) {
         return find(e) != -1;
     }
 
     /**
-     * O(n)
+     * Time complexity: O(n)
      */
     public E remove(int index) {
         if(index < 0 || index >= size) {
@@ -219,21 +219,21 @@ public class DynamicArray<E> {
     }
 
     /**
-     * O(n)
+     * Time complexity: O(n)
      */
     public E removeFirst() {
         return remove(0);
     }
 
     /**
-     * amortized time complexity: O(1)
+     * Amortized time complexity: O(1)
      */
     public E removeLast() {
         return remove(size - 1);
     }
 
     /**
-     * O(n)
+     * Time complexity: O(n)
      */
     public int removeElement(E e) {
         int index = find(e);
@@ -245,7 +245,7 @@ public class DynamicArray<E> {
 
     /**
      * @author: Kitto
-     * O(n²) FIXME The indexes have changed after remove the first matched element.
+     * Time complexity: O(n²) FIXME The indexes have changed after remove the first matched element.
      */
     public int[] removeAllElements(E e) {
         int[] indexes = findAll(e);
