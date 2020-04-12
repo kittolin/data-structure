@@ -22,7 +22,7 @@ public class ArrayStack<E> implements Stack<E> {
 
     @Override
     public int getSize() {
-        return arr.getLength();
+        return arr.getSize();
     }
 
     @Override

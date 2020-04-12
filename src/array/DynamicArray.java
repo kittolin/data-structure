@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class DynamicArray<E> {
 
     private E[] arr;
-    private int length;
+    private int size;
 
     public DynamicArray(int capacity) {
         if(capacity <= 0) {
@@ -13,7 +13,7 @@ public class DynamicArray<E> {
         }
 
         arr = (E[])new Object[capacity];
-        length = 0;
+        size = 0;
     }
 
     public DynamicArray(E[] arr) {
@@ -29,19 +29,26 @@ public class DynamicArray<E> {
         return arr.length;
     }
 
-    public int getLength() {
-        return length;
+    public int getSize() {
+        return size;
     }
 
     public boolean isEmpty() {
-        return length == 0;
+        return size == 0;
     }
 
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
-        res.append(String.format("Dynamic Array: capacity = %d, length = %d\n", arr.length, length));
-        res.append(String.format("%s%s%s", "[", String.join(", ", (String[])arr), "]"));
+        res.append(String.format("Dynamic Array: capacity = %d, size = %d\n", arr.length, size));
+        res.append("[");
+        for(int i = 0; i < size; i++) {
+            res.append(arr[i]);
+            if(i != size - 1) {
+                res.append(", ");
+            }
+        }
+        res.append("]");
         return res.toString();
     }
 
@@ -49,12 +56,13 @@ public class DynamicArray<E> {
      * 动态扩缩容
      */
     private void resize(int newCapacity) {
-        if(newCapacity <= length) {
-            throw new IllegalArgumentException("Resize failed. Require newCapacity > length.");
+        if(newCapacity <= size) {
+            throw new IllegalArgumentException("Resize failed. Require newCapacity > size.");
         }
+        System.out.println(String.format("Resize %d to %d.", arr.length, newCapacity));
 
         E[] newArr = (E[])new Object[newCapacity];
-        for(int i = 0; i < length; i++) {
+        for(int i = 0; i < size; i++) {
             newArr[i] = arr[i];
         }
         arr = newArr;
@@ -64,20 +72,20 @@ public class DynamicArray<E> {
      * O(n)
      */
     public void add(int index, E e) {
-        if(index < 0 || index > length) {
+        if(index < 0 || index > size) {
             throw new IllegalArgumentException("Add failed. Invalid index.");
         }
 
-        if(length == arr.length) {
+        if(size == arr.length) {
             resize(2 * arr.length);
         }
 
-        for(int i = length - 1; i >= index; i--) {
+        for(int i = size - 1; i >= index; i--) {
             arr[i + 1] = arr[i];
         }
         arr[index] = e;
 
-        length ++;
+        size++;
     }
 
     /**
@@ -91,10 +99,11 @@ public class DynamicArray<E> {
      * amortized time complexity: O(1)
      */
     public void addLast(E e) {
-        add(length, e);
+        add(size, e);
     }
 
     /**
+     * @author: Kitto
      * O(n)
      */
     public void add(E[] arr) {
@@ -104,7 +113,7 @@ public class DynamicArray<E> {
 
         // if arr.length >>> capacity, method "resize" will be called several times.
         // So resize firstly.
-        if(arr.length > this.arr.length - length) {
+        if(arr.length > this.arr.length - size) {
             resize(2 * this.arr.length + arr.length);
         }
 
@@ -117,7 +126,7 @@ public class DynamicArray<E> {
      * O(1)
      */
     public void set(int index, E e) {
-        if(index < 0 || index >= length) {
+        if(index < 0 || index >= size) {
             throw new IllegalArgumentException("Set failed. Invalid index.");
         }
         arr[index] = e;
@@ -127,7 +136,7 @@ public class DynamicArray<E> {
      * O(1)
      */
     public E get(int index) {
-        if(index < 0 || index >= length) {
+        if(index < 0 || index >= size) {
             throw new IllegalArgumentException("Get failed. Invalid index.");
         }
         return arr[index];
@@ -144,14 +153,14 @@ public class DynamicArray<E> {
      * O(1)
      */
     public E getLast() {
-        return get(length - 1);
+        return get(size - 1);
     }
 
     /**
      * O(n)
      */
     public int find(E e) {
-        for(int i = 0; i < length; i++) {
+        for(int i = 0; i < size; i++) {
             if(arr[i].equals(e)) {
                 return i;
             }
@@ -160,20 +169,20 @@ public class DynamicArray<E> {
     }
 
     /**
+     * @author: Kitto
      * O(n)
      */
     public int[] findAll(E e) {
         ArrayList<Integer> list = new ArrayList<>();
-        for(int i = 0; i < length; i++) {
+        for(int i = 0; i < size; i++) {
             if(arr[i].equals(e)) {
                 list.add(i);
             }
         }
 
-        Integer[] temp = (Integer[])list.toArray();
-        int[] ret = new int[temp.length];
+        int[] ret = new int[list.size()];
         for(int i = 0; i < ret.length; i++) {
-            ret[i] = temp[i];
+            ret[i] = list.get(i);
         }
         return ret;
     }
@@ -189,20 +198,20 @@ public class DynamicArray<E> {
      * O(n)
      */
     public E remove(int index) {
-        if(index < 0 || index >= length) {
+        if(index < 0 || index >= size) {
             throw new IllegalArgumentException("Remove failed. Invalid index.");
         }
 
         E ret = arr[index];
-        for(int i = index; i < length - 1; i++) {
+        for(int i = index; i < size - 1; i++) {
             arr[i] = arr[i + 1];
         }
 
-        length --;
-        arr[length] = null;  // loitering objects != memory leak
+        size--;
+        arr[size] = null;  // loitering objects != memory leak
 
         // lazy 方式防止复杂度震荡
-        if (length == arr.length / 4 && arr.length / 2 != 0) {
+        if (size == arr.length / 4 && arr.length / 2 != 0) {
             resize(arr.length / 2);
         }
 
@@ -220,7 +229,7 @@ public class DynamicArray<E> {
      * amortized time complexity: O(1)
      */
     public E removeLast() {
-        return remove(length - 1);
+        return remove(size - 1);
     }
 
     /**
@@ -235,7 +244,8 @@ public class DynamicArray<E> {
     }
 
     /**
-     * O(n²) TODO
+     * @author: Kitto
+     * O(n²) FIXME The indexes have changed after remove the first matched element.
      */
     public int[] removeAllElements(E e) {
         int[] indexes = findAll(e);
