@@ -3,6 +3,7 @@ package array;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import pojo.Student;
 
 import java.util.Random;
 
