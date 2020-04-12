@@ -1,6 +1,6 @@
-package main.stack;
+package stack;
 
-import main.array.DynamicArray;
+import array.DynamicArray;
 
 import java.util.EmptyStackException;
 
