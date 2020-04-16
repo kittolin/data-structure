@@ -33,7 +33,7 @@ public class ArrayQueue<E> implements Queue<E> {
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
-        res.append(String.format("Queue: capacity = %d, size = %d.", array.getCapacity(), array.getSize()));
+        res.append(String.format("Queue: capacity = %d, size = %d.\n", array.getCapacity(), array.getSize()));
         res.append("front [");
         for(int i = 0; i < array.getSize(); i++) {
             res.append(array.get(i));

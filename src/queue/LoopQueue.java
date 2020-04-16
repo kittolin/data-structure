@@ -83,7 +83,7 @@ public class LoopQueue<E> implements Queue<E> {
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
-        res.append(String.format("Queue: capacity = %d, size = %d", getCapacity(), getSize()));
+        res.append(String.format("Queue: capacity = %d, size = %d.\n", getCapacity(), getSize()));
         res.append("front [");
         for(int i = front; i != tail; i = (i + 1) % array.length) {
             res.append(array[i]);
@@ -92,7 +92,7 @@ public class LoopQueue<E> implements Queue<E> {
             }
         }
         res.append("] tail");
-        return super.toString();
+        return res.toString();
     }
 
     private void resize(int newCapacity) {
