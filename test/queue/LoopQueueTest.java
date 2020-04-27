@@ -5,6 +5,7 @@ import org.junit.Test;
 import pojo.Student;
 
 import java.util.NoSuchElementException;
+import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -83,6 +84,19 @@ public class LoopQueueTest {
 
         loopQueue.getFront();
         fail("Front operation has executed, but the array queue is empty.");
+    }
+
+    @Test
+    public void testDequeuePerformance() {
+        int opCount = 100000;
+        Random random = new Random();
+
+        for(int i = 0; i < opCount; i++) {
+            loopQueue.enqueue(new Student(random.nextInt(Integer.MAX_VALUE), random.nextInt(Integer.MAX_VALUE)));
+        }
+        while(!loopQueue.isEmpty()) {
+            loopQueue.dequeue();
+        }
     }
 
 }
