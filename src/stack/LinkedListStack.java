@@ -56,7 +56,7 @@ public class LinkedListStack<E> implements Stack<E> {
     public String toString() {
         StringBuilder res = new StringBuilder();
         res.append(String.format("Stack: size = %d\n", getSize()));
-        res.append("top");
+        res.append("top ");
         res.append(linkedList);
         return res.toString();
     }

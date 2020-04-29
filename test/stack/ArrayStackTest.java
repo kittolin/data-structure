@@ -5,6 +5,7 @@ import org.junit.Test;
 import pojo.Student;
 
 import java.util.EmptyStackException;
+import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -83,6 +84,19 @@ public class ArrayStackTest {
 
         arrayStack.peek();
         fail("Peek operation has executed, but the array stack is empty.");
+    }
+
+    @Test
+    public void testPerformance() {
+        int opCount = 1000000;
+        Random random = new Random();
+
+        for(int i = 0; i < opCount; i++) {
+            arrayStack.push(new Student(random.nextInt(Integer.MAX_VALUE), random.nextInt(Integer.MAX_VALUE)));
+        }
+        while(!arrayStack.isEmpty()) {
+            arrayStack.pop();
+        }
     }
 
 }
