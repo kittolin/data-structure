@@ -88,7 +88,7 @@ public class LoopQueueTest {
 
     @Test
     public void testDequeuePerformance() {
-        int opCount = 100000;
+        int opCount = 10000000;
         Random random = new Random();
 
         for(int i = 0; i < opCount; i++) {
