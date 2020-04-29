@@ -72,6 +72,9 @@ public class LoopQueue<E> implements Queue<E> {
         return ret;
     }
 
+    /**
+     *  Time complexity: O(1)
+     */
     @Override
     public E getFront() {
         if(isEmpty()) {

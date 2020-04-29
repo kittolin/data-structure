@@ -64,6 +64,9 @@ public class ArrayQueue<E> implements Queue<E> {
         return array.removeFirst();
     }
 
+    /**
+     * Time complexity: O(1)
+     */
     @Override
     public E getFront() {
         if(array.isEmpty()) {
