@@ -63,7 +63,7 @@ public class ArrayStack<E> implements Stack<E> {
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
-        res.append(String.format("Array Stack: capacity = %d, size = %d\n", getCapacity(), getSize()));
+        res.append(String.format("Stack: capacity = %d, size = %d\n", getCapacity(), getSize()));
         res.append("[");
         for(int i = 0; i < getSize(); i++) {
             res.append(arr.get(i));
