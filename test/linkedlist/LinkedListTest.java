@@ -130,4 +130,15 @@ public class LinkedListTest {
         System.out.println(linkedList.toString());
     }
 
+    @Test
+    public void testRemoveElementsRecursively() {
+        linkedList.removeElementsRecursively(new Student(3, 100));
+        assertEquals(3, linkedList.getSize());
+        System.out.println(linkedList.toString());
+
+        linkedList.removeElementsRecursively(new Student(2, 95));
+        assertEquals(1, linkedList.getSize());
+        System.out.println(linkedList.toString());
+    }
+
 }

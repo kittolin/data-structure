@@ -219,4 +219,22 @@ public class LinkedList<E> {
         }
     }
 
+
+    public void removeElementsRecursively(E e) {
+        removeElementsRecursively(dummyHead.next, e);
+    }
+
+    private Node removeElementsRecursively(Node head, E e) {
+        if(head == null) {
+            return null;
+        }
+
+        head.next = removeElementsRecursively(head.next, e);
+        if(head.e.equals(e)) {
+            size --;
+            return head.next;
+        }
+        return head;
+    }
+
 }
