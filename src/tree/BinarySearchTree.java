@@ -99,7 +99,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         ArrayList<E> arrayList = new ArrayList<>();
         preOrderTraverse(root, arrayList);
 
-        E[] array = (E[])new Object[size];
+        E[] array = (E[])new Comparable[size];
         for (int i = 0; i < size; i++) {
             array[i] = arrayList.get(i);
         }
@@ -123,7 +123,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         ArrayList<E> arrayList = new ArrayList<>();
         inOrderTraverse(root, arrayList);
 
-        E[] array = (E[])new Object[size];
+        E[] array = (E[])new Comparable[size];
         for (int i = 0; i < size; i++) {
             array[i] = arrayList.get(i);
         }
@@ -135,9 +135,9 @@ public class BinarySearchTree<E extends Comparable<E>> {
             return;
         }
 
-        preOrderTraverse(root.left, arrayList);
+        inOrderTraverse(root.left, arrayList);
         arrayList.add(root.e);
-        preOrderTraverse(root.right, arrayList);
+        inOrderTraverse(root.right, arrayList);
     }
 
     /**
@@ -147,7 +147,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         ArrayList<E> arrayList = new ArrayList<>();
         postOrderTraverse(root, arrayList);
 
-        E[] array = (E[])new Object[size];
+        E[] array = (E[])new Comparable[size];
         for (int i = 0; i < size; i++) {
             array[i] = arrayList.get(i);
         }
@@ -159,8 +159,8 @@ public class BinarySearchTree<E extends Comparable<E>> {
             return;
         }
 
-        preOrderTraverse(root.left, arrayList);
-        preOrderTraverse(root.right, arrayList);
+        postOrderTraverse(root.left, arrayList);
+        postOrderTraverse(root.right, arrayList);
         arrayList.add(root.e);
     }
 
@@ -168,7 +168,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
      * Time complexity: O(N)
      */
     public E[] preOrderTraverseNotRecursive() {
-        E[] array = (E[])new Object[size];
+        E[] array = (E[])new Comparable[size];
         if (root == null) {
             return array;
         }
@@ -196,7 +196,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
      * Time complexity: O(N)
      */
     public E[] levelOrderTraverse() {
-        E[] array = (E[])new Object[size];
+        E[] array = (E[])new Comparable[size];
         if (root == null) {
             return array;
         }
@@ -349,6 +349,15 @@ public class BinarySearchTree<E extends Comparable<E>> {
         return successor;
     }
 
+    /**
+     * @author: Kitto
+     * Time complexity: O(1)
+     */
+    public void clear() {
+        root = null;
+        size = 0;
+    }
+
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
@@ -358,10 +367,11 @@ public class BinarySearchTree<E extends Comparable<E>> {
 
     private void genBSTString(Node root, int depth, StringBuilder res) {
         if (root == null) {
-            res.append(genDepthString(depth) + "NULL\n");
+            res.append(genDepthString(depth)).append("NULL\n");
+            return;
         }
 
-        res.append(genDepthString(depth) + root.e + "\n");
+        res.append(genDepthString(depth)).append(root.e).append("\n");
         genBSTString(root.left, depth + 1, res);
         genBSTString(root.right, depth + 1, res);
     }
