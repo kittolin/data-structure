@@ -61,6 +61,10 @@ public class LinkedListMap<K, V> implements Map<K, V> {
      */
     @Override
     public void add(K key, V value) {
+        if (key == null) {
+            throw new IllegalArgumentException("Add failed. Key cannot be null.");
+        }
+
         Node node = getNode(key);
         if (node == null) {
             dummyHead.next = new Node(key, value, dummyHead.next);
@@ -75,6 +79,10 @@ public class LinkedListMap<K, V> implements Map<K, V> {
      */
     @Override
     public V remove(K key) {
+        if (key == null) {
+            throw new IllegalArgumentException("Remove failed. Key cannot be null.");
+        }
+
         Node prev = dummyHead;
         while (prev.next != null) {
             if (prev.next.key.equals(key)) {
@@ -94,6 +102,10 @@ public class LinkedListMap<K, V> implements Map<K, V> {
      */
     @Override
     public void set(K key, V newValue) {
+        if (key == null) {
+            throw new IllegalArgumentException("Set failed. Key cannot be null.");
+        }
+
         Node node = getNode(key);
         if (node == null) {
             throw new IllegalArgumentException(key + " doesn't exist.");
@@ -106,6 +118,10 @@ public class LinkedListMap<K, V> implements Map<K, V> {
      */
     @Override
     public V get(K key) {
+        if (key == null) {
+            throw new IllegalArgumentException("Key cannot be null.");
+        }
+
         Node node = getNode(key);
         return node == null ? null : node.value;
     }
@@ -115,6 +131,9 @@ public class LinkedListMap<K, V> implements Map<K, V> {
      */
     @Override
     public boolean contains(K key) {
+        if (key == null) {
+            throw new IllegalArgumentException("Key cannot be null.");
+        }
         return getNode(key) != null;
     }
 
