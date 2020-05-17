@@ -255,4 +255,14 @@ public class DynamicArray<E> {
         return indexes;
     }
 
+    public void swap(int i, int j) {
+        if (i < 0 || i >= size || j < 0 || j >= size) {
+            throw new IllegalArgumentException("Invalid index.");
+        }
+
+        E temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
 }
