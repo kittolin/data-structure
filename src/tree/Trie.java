@@ -95,4 +95,37 @@ public class Trie {
         return true;
     }
 
+    /**
+     * A word could contain the dot character '.' to represent any one letter.
+     * Worst time complexity: O(n), 'n' is the number of the nodes.
+     */
+    public boolean fuzzySearch(String word) {
+        if (word == null) {
+            return false;
+        }
+        return fuzzySearch(root, word, 0);
+    }
+
+    private boolean fuzzySearch(Node node, String word, int index) {
+        if (index == word.length()) {
+            return node.isWord;
+        }
+
+        char c = word.charAt(index);
+
+        if (c == '.') {
+            for (char nextChar: node.next.keySet()) {
+                if (fuzzySearch(node.next.get(nextChar), word, index + 1)) {
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            if (node.next.get(c) == null) {
+                return false;
+            }
+            return fuzzySearch(node.next.get(c), word, index + 1);
+        }
+    }
+
 }

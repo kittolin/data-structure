@@ -58,4 +58,13 @@ public class TrieTest {
         assertFalse(trie.startsWith("python"));
     }
 
+    @Test
+    public void testFuzzySearch() {
+        assertFalse(trie.fuzzySearch(null));
+        assertFalse(trie.fuzzySearch(""));
+        assertFalse(trie.fuzzySearch("cook"));
+        assertTrue(trie.fuzzySearch("co.."));
+        assertFalse(trie.fuzzySearch("pa."));
+    }
+
 }
