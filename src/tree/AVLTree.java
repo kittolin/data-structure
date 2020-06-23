@@ -170,8 +170,8 @@ public class AVLTree<K extends Comparable<K>, V> {
      * Worst time complexity: O(logN)
      */
     public void add(K key, V value) {
-        if (key == null || value == null) {
-            throw new IllegalArgumentException("Key or value mustn't be null.");
+        if (key == null) {
+            throw new IllegalArgumentException("Key mustn't be null.");
         }
         root = add(root, key, value);
     }
