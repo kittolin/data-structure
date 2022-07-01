@@ -350,7 +350,6 @@ public class BinarySearchTree<E extends Comparable<E>> {
     }
 
     /**
-     * @author: Kitto
      * Time complexity: O(1)
      */
     public void clear() {

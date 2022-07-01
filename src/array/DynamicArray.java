@@ -103,7 +103,6 @@ public class DynamicArray<E> {
     }
 
     /**
-     * @author: Kitto
      * Time complexity: O(n)
      */
     public void add(E[] arr) {
@@ -169,7 +168,6 @@ public class DynamicArray<E> {
     }
 
     /**
-     * @author: Kitto
      * Time complexity: O(n)
      */
     public int[] findAll(E e) {
@@ -241,18 +239,6 @@ public class DynamicArray<E> {
             remove(index);
         }
         return index;
-    }
-
-    /**
-     * @author: Kitto
-     * Time complexity: O(n²) FIXME The indexes have changed after remove the first matched element.
-     */
-    public int[] removeAllElements(E e) {
-        int[] indexes = findAll(e);
-        for (int index: indexes) {
-            remove(index);
-        }
-        return indexes;
     }
 
     public void swap(int i, int j) {

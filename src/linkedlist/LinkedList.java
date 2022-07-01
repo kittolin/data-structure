@@ -202,7 +202,6 @@ public class LinkedList<E> {
     }
 
     /**
-     * @author: Kitto
      * Time Complexity: O(n)
      */
     public void removeElements(E e) {
